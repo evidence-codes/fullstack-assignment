@@ -9,7 +9,7 @@ This project is a GraphQL API for managing departments and sub-departments. It s
 - **Node.js**
 - **GraphQL** (Apollo Server)
 - **PostgreSQL**
-- **Prisma ORM**
+- **TypeORM**
 - **JWT Authentication**
 - **Deployed on**: [Render](https://render.com)
 
@@ -33,8 +33,8 @@ You can access the deployed API at:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/evidence-codes/fullstack-assignment.git
+cd fullstack-assignment
 ```
 
 ### 2. Install Dependencies
