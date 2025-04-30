@@ -1,10 +1,11 @@
-import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
+import { Resolver, Mutation, Args, Query, Int } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
 import { DepartmentService } from './department.service';
 import { Department } from './entities/department.entity';
 import { SubDepartment } from './entities/sub-department.entity';
 import { CreateDepartmentInput } from './dto/create-department.input';
+import { PaginatedDepartments } from './dto/paginated-departments.output';
 import { GqlAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @UseGuards(GqlAuthGuard)
@@ -17,9 +18,12 @@ export class DepartmentResolver {
     return this.deptService.create(input);
   }
 
-  @Query(() => [Department])
-  getDepartments() {
-    return this.deptService.findAll();
+  @Query(() => PaginatedDepartments)
+  getDepartments(
+    @Args('page', { type: () => Int }) page: number,
+    @Args('limit', { type: () => Int }) limit: number,
+  ) {
+    return this.deptService.findPaginated(page, limit);
   }
 
   @Mutation(() => Department)

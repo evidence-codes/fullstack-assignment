@@ -13,8 +13,15 @@ type Department {
   subDepartments: [SubDepartment!]
 }
 
+type PaginatedDepartments {
+  items: [Department!]!
+  totalItems: Int!
+  totalPages: Int!
+  currentPage: Int!
+}
+
 type Query {
-  getDepartments: [Department!]!
+  getDepartments(page: Int!, limit: Int!): PaginatedDepartments!
   getSubDepartments(departmentId: Float!): [SubDepartment!]!
 }
 

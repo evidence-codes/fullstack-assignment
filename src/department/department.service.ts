@@ -33,6 +33,22 @@ export class DepartmentService {
     return this.departmentRepository.find({ relations: ['subDepartments'] });
   }
 
+  async findPaginated(page: number, limit: number) {
+    const [items, totalItems] = await this.departmentRepository.findAndCount({
+      skip: (page - 1) * limit,
+      take: limit,
+      relations: ['subDepartments'],
+      order: { id: 'ASC' },
+    });
+
+    return {
+      items,
+      totalItems,
+      totalPages: Math.ceil(totalItems / limit),
+      currentPage: page,
+    };
+  }
+
   async update(id: number, name: string): Promise<Department> {
     const department = await this.departmentRepository.findOne({
       where: { id },
