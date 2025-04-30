@@ -21,6 +21,7 @@ type PaginatedDepartments {
 }
 
 type Query {
+  getDepartment(id: Float!): Department!
   getDepartments(page: Int!, limit: Int!): PaginatedDepartments!
   getSubDepartments(departmentId: Float!): [SubDepartment!]!
 }

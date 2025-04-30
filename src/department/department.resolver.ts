@@ -18,6 +18,11 @@ export class DepartmentResolver {
     return this.deptService.create(input);
   }
 
+  @Query(() => Department)
+  getDepartment(@Args('id') id: number): Promise<Department> {
+    return this.deptService.findOne(id);
+  }
+
   @Query(() => PaginatedDepartments)
   getDepartments(
     @Args('page', { type: () => Int }) page: number,
